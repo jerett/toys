@@ -1,10 +1,10 @@
 #include <cstdio>
 #include <type_traits>
+#include <gtest/gtest.h>
 
 struct ICounter {
   void Increase() { 
   }
-
 };
 
 namespace { //type failure
@@ -49,7 +49,6 @@ void inc_counter3(T &obj_counter, std::decay_t<decltype(obj_counter.Increase())>
 
 }
 
-
 namespace { //universe failure
 
 template <typename T>
@@ -60,10 +59,9 @@ void foo(T &&val,
   std::printf("universe reference on foo\n");
 }
 
-
 }
 
-int main() {
+TEST(SFINATE, test) {
   ICounter obj_cnt;
   int int_cnt;
   const ICounter const_obj_cnt;
@@ -81,6 +79,4 @@ int main() {
   float fuck;
   foo(fuck);
   foo(1.5f);
-
-  return 0;
 }
